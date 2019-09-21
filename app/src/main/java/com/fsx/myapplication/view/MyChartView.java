@@ -99,6 +99,10 @@ public class MyChartView extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean b, int l, int i1, int i2, int i3) {
+        mWidth = getWidth();
+        mHeight = getHeight();
+        init();
+        
         int cl;//最左边x轴位置
         int ct;//最上边y轴位置
         int cr;//最右边x轴位置
@@ -116,16 +120,16 @@ public class MyChartView extends RelativeLayout {
 //                    txt = strings[0];
 //                }
 //                childView.setText(txt);
-                cl = (int) (x[i] - childView.getWidth() / 2);
-                ct = (int) (y[i] - childView.getHeight() - dp2px(6));
+                cl = (int) (x[i] - childView.getMeasuredWidth() / 2);
+                ct = (int) (y[i] - childView.getMeasuredHeight() - dp2px(6));
                 cr = cl + childView.getMeasuredWidth();
                 cb = ct + childView.getMeasuredHeight();
                 childView.layout(cl, ct, cr, cb);
 
             } else {
                 View view = getChildAt(i);
-                cl = (int) (x[i - 7] - view.getWidth() / 2);
-                ct = (int) (y[i - 7] - view.getHeight() / 2);
+                cl = (int) (x[i - 7] - view.getMeasuredWidth() / 2);
+                ct = (int) (y[i - 7] - view.getMeasuredHeight() / 2);
                 cr = cl + dp2px(10);
                 cb = ct + dp2px(10);
                 view.layout(cl, ct, cr, cb);
@@ -179,9 +183,7 @@ public class MyChartView extends RelativeLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        mWidth = getWidth();
-        mHeight = getHeight();
-        init();
+        
         int width = 0;
         int height = 0;
         int mWidthMeasureMode = MeasureSpec.getMode(widthMeasureSpec);
